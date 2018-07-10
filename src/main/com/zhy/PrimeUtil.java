@@ -6,21 +6,26 @@ public class PrimeUtil {
     public static int[] getPrimes(int max) {
         if (max <= 2) {
             return new int[]{};
-        } else {
-            int[] newArray = new int[max];
-            int size = 0, j = 0;
-            for (int i = 0; i < max; i++) {
-                for (j = 2; j < i/2+1; j++) {
-                    if (i % j == 0) {
-                        break;
-                    }
-                }
-                if (j == i/2+1) {
-                    newArray[size++] = i;
-                }
-            }
-            newArray = Arrays.copyOf(newArray, size);
-            return newArray;
         }
+
+        int[] primes = new int[max];
+        int count = 0;
+        for (int num = 2; num < max; num++) {
+            if (isPrime(num)) {
+                primes[count++] = num;
+            }
+        }
+        primes = Arrays.copyOf(primes, count);
+        return primes;
+
+    }
+
+    public static boolean isPrime(int num) {
+        for (int i = 2; i < num / 2 + 1; i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
